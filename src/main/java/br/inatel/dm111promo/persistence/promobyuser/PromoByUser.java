@@ -13,17 +13,9 @@ public class PromoByUser {
     private String expiration;
     private String user;
     private List<Product> productsForYou;
+    private List<Product> products;
 
     public PromoByUser() {
-    }
-
-    public PromoByUser(String id, String name, String starting, String expiration, String user, List<Product> productsForYou) {
-        this.id = id;
-        this.name = name;
-        this.starting = starting;
-        this.expiration = expiration;
-        this.user = user;
-        this.productsForYou = productsForYou;
     }
 
     public String getId() {
@@ -72,5 +64,13 @@ public class PromoByUser {
 
     public void setProductsForYou(List<Product> productsForYou) {
         this.productsForYou = productsForYou;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

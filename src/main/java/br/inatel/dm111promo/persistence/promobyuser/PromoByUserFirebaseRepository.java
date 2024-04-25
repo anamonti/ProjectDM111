@@ -56,29 +56,4 @@ public class PromoByUserFirebaseRepository implements PromoByUserRepository {
                 .filter(promo -> promo.getUser().equalsIgnoreCase(id))
                 .findFirst();
     }
-
-    @Override
-    public List<PromoByUser> findAllByUserId(String userId) throws ExecutionException, InterruptedException {
-        return firestore.collection(COLLECTION_NAME)
-                .get()
-                .get()
-                .getDocuments()
-                .parallelStream()
-                .map(promo -> promo.toObject(PromoByUser.class))
-                .filter(promo -> promo.getUser().equals(userId))
-                .toList();
-    }
-
-    private List<Product> findProductsFromList(List<String> productsFromList, List<Promo> promos) {
-        List<Product> products = new ArrayList<>();
-        for (Promo promo : promos) {
-            for (Product product : promo.getProducts()) {
-                if (productsFromList.contains(product.getId())) {
-                    products.add(product);
-                }
-            }
-        }
-        return products;
-    }
-
 }

@@ -17,6 +17,4 @@ public interface PromoByUserRepository {
     Optional<PromoByUser> findById(String id) throws ExecutionException, InterruptedException;
 
     Optional<PromoByUser> findByUserId(String id) throws ExecutionException, InterruptedException;
-
-    List<PromoByUser> findAllByUserId(String userId) throws ExecutionException, InterruptedException;
 }

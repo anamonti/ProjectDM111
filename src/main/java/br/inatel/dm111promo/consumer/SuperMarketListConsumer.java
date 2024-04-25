@@ -89,18 +89,23 @@ public class SuperMarketListConsumer {
             log.error("Failure to process the supermarket list products.", e);
         }
 
-        PromoByUser promoByUser = buildPromoByUser(data.products(), promoList);
+        if (promoList != null) buildPromoByUser(data.products(), promoList);
     }
 
-    private PromoByUser buildPromoByUser(List<String> productsFromList, List<Promo> promos) {
-        PromoByUser promoByUser = new PromoByUser();
+    private void buildPromoByUser(List<String> productsFromList, List<Promo> promos) {
+        PromoByUser promoByUser;
         List<Product> products;
+        List<Product> productsForYou;
 
         for (Promo promo : promos) {
+            promoByUser = new PromoByUser();
             products = Collections.emptyList();
+            productsForYou = Collections.emptyList();
 
             for (Product product : promo.getProducts()) {
                 if (productsFromList.contains(product.getId())) {
+                    productsForYou.add(product);
+                } else {
                     products.add(product);
                 }
             }
@@ -112,7 +117,5 @@ public class SuperMarketListConsumer {
 
             promoByUserRepository.save(promoByUser);
         }
-
-        return promoByUser;
     }
 }
